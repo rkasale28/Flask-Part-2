@@ -15,3 +15,4 @@
   - [Retrieving](https://gist.github.com/greyli/ca74d71f13c52d089a8da8d2b758d519)
 - Relationship
   - [One-to-One-Relationship](https://www.youtube.com/watch?v=JI76IvF9Lwg)
+  - [One-to-Many-Relationship](https://www.youtube.com/watch?v=juPQ04_twtA)
