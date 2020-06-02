@@ -8,3 +8,8 @@
 - Static Images:
   - [HTML](https://www.youtube.com/watch?v=tXpFERibRaU)
   - [CSS](https://stackoverflow.com/questions/39579666/how-to-set-background-image-on-flask-templates/39579810)
+- Images in Databases
+  - Uploading
+    - [Video Tutorial](https://www.youtube.com/watch?v=HNw6shJv9Ck)
+    - [Documentation](https://pythonhosted.org/Flask-Uploads/)
+  - [Retrieving](https://gist.github.com/greyli/ca74d71f13c52d089a8da8d2b758d519)
