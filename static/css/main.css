@@ -3,6 +3,10 @@ body, html {
     font-family: sans-serif;
 }
 
+/*body{
+    background-image: url('../images/book_store.jpg')
+}*/
+
 .content {
     margin: 0 auto;
     width: 400px;
