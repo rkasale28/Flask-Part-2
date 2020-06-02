@@ -2,5 +2,14 @@
 **References:**
 - [Flask Extensions](https://www.youtube.com/watch?v=ttc1sjUeCiA)
 - [Using Postgres](https://vsupalov.com/flask-sqlalchemy-postgres/)
-- [Using Migrations](https://www.youtube.com/watch?v=BAOfjPuVby0&feature=emb_logo)
+- Migrations
+  - [Tutorial](https://www.youtube.com/watch?v=BAOfjPuVby0&feature=emb_logo)
   - [With Flask Extensions](https://stackoverflow.com/questions/48603220/error-on-flask-migrate-with-application-factory)
+- Static Images:
+  - [HTML](https://www.youtube.com/watch?v=tXpFERibRaU)
+  - [CSS](https://stackoverflow.com/questions/39579666/how-to-set-background-image-on-flask-templates/39579810)
+- Images in Databases
+  - Uploading
+    - [Video Tutorial](https://www.youtube.com/watch?v=HNw6shJv9Ck)
+    - [Documentation](https://pythonhosted.org/Flask-Uploads/)
+  - [Retrieving](https://gist.github.com/greyli/ca74d71f13c52d089a8da8d2b758d519)
