@@ -10,11 +10,13 @@
     <table>
         <tr>
             <th>Book Name</th>
+            <th>Book Price</th>
             <th>Options</th>
         </tr>
         {% for book in books %}
         <tr>
             <td>{{book.name}}</td>
+            <td>Rs. {{book.price}}</td>
             <td>
                 <a href="/delete/{{book.id}}">Delete</a><br>
                 <a href="/update/{{book.id}}">Update</a>
@@ -24,7 +26,8 @@
     </table>
 
     <form action='/' method="POST">
-        <input type="text" name="bookname" id="bookname">
+        <input type="text" name="bookname" id="bookname" placeholder="Enter Book Name"><br>
+        <input type="text" name="price" id="price" placeholder="Enter Book Price"><br>
         <input type="submit" value="Add book">
     </form>
 </div>
