@@ -1,5 +1,5 @@
 from flask import Flask,request,redirect,render_template,send_from_directory
-from models import db,Book,migrate
+from models import db,Book,migrate,Student
 from flask_migrate import MigrateCommand
 from flask_script import Manager
 from flask_uploads import configure_uploads, IMAGES, UploadSet
@@ -67,6 +67,41 @@ def update(id):
     else:
         return render_template('update.html',book=book)
 
+@app.route('/student',methods=['POST','GET'])
+def student_index():
+    if request.method=='POST':
+        student_name=request.form['studentname']
+        profile_pic=request.files['profile_pic']
+        filename=images.save(profile_pic)
+        newstudent=Student(name=student_name,profile_pic=filename)
+
+        try:
+            db.session.add(newstudent)
+            db.session.commit()
+            return redirect('/student')
+        except:
+            return 'There was an issue adding student'
+    else:
+        students=Student.query.order_by('name').all()
+        return render_template('student_index.html', students=students)
+
+@app.route('/displayBook/<int:id>',methods=['POST','GET'])
+def displayBook(id):
+    books=Book.query.order_by('name').all()
+    return render_template('assign.html',stu_id=id,books=books)
+
+@app.route('/assign/<int:bk_id>/<int:st_id>',methods=['POST','GET'])
+def assign(bk_id,st_id):
+    book=Book.query.get_or_404(bk_id)
+    student=Student.query.get_or_404(st_id)
+    student.book=book
+
+    try:
+        db.session.commit()
+        return redirect('/student')
+    except:
+        return 'There was an issue adding student'
+    
 @app.route('/media/images/<filename>')
 def retrieve_image(filename):
     return send_from_directory(app.config['UPLOADED_IMAGES_DEST'],filename)

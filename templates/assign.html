@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %} 
+<div class="content" style="margin:auto;">
+    <h1>Assign Book</h1>
+
+    <table>
+        <tr>
+            <th>Cover Page</th>
+            <th>Book Name</th>
+            <th>Book Price</th>
+            <th>Options</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>
+                <img src="{{ url_for('retrieve_image', filename=book.filename) }}" width="100px" height="153px">
+            </td>
+            <td>{{book.name}}</td>
+            <td>Rs. {{book.price}}</td>
+            <td>
+                <a href="/assign/{{book.id}}/{{stu_id}}">Assign</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

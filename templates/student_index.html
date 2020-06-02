@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Student Manager</title>
+{% endblock %}
+
+{% block body %}
+
+<!-- <img src="{{ url_for('static',filename='images/book_store.jpg') }}" width="200px"> -->
+<div class="content">
+    <h1>Student Manager</h1>
+
+    <table>
+        <tr>
+            <th width="20%">Profile Pic</th>
+            <th width="30%">Student Name</th>
+            <th width="20%">Book Cover</th>
+            <th width="30%">Book Name</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>
+                <img src="{{ url_for('retrieve_image', filename=student.profile_pic) }}" width="50px" height="50px" style="border-radius: 50px;object-fit:cover">
+            </td>
+            <td>{{student.name}}</td>
+            <td>
+                {% if student.book is not none %}
+                <img src="{{ url_for('retrieve_image', filename=student.book.filename) }}" width="50px" height="50px" style="object-fit:cover">
+                {% else %}
+                Not yet assigned
+                {% endif %}
+            </td>
+            <td>
+                {% if student.book is none %}
+                <a href="/displayBook/{{student.id}}">Assign</a><br>
+                {% else %}
+                {{student.book.name}}
+                {% endif %}    
+            </td>            
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="content_form">
+    <form action='/student' method="POST" enctype="multipart/form-data" style="margin: 10px;">
+        <input type="text" name="studentname" id="studentname" placeholder="Enter Student Name"><br>
+        <input type="file" name="profile_pic" accept="image/*"><br>
+        <input type="submit" value="Add student">
+    </form>
+</div>
+
+{% endblock %}
