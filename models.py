@@ -19,3 +19,13 @@ class Student(db.Model):
     name=db.Column(db.String(20),nullable=False)
     profile_pic=db.Column(db.String(100))
     book=db.relationship('Book',backref='student',uselist=False)
+    addresses=db.relationship('Address',backref='student')
+
+class Address(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    addr=db.Column(db.String(200),nullable=False)
+    student_id=db.Column(db.Integer,db.ForeignKey('student.id'))
+
+    def __repr__(self):
+        return self.addr
+

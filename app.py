@@ -1,5 +1,5 @@
 from flask import Flask,request,redirect,render_template,send_from_directory
-from models import db,Book,migrate,Student
+from models import db,Book,migrate,Student,Address
 from flask_migrate import MigrateCommand
 from flask_script import Manager
 from flask_uploads import configure_uploads, IMAGES, UploadSet
@@ -87,7 +87,7 @@ def student_index():
 
 @app.route('/displayBook/<int:id>',methods=['POST','GET'])
 def displayBook(id):
-    books=Book.query.order_by('name').all()
+    books=Book.query.order_by('name').filter(Book.student_id.is_(None))
     return render_template('assign.html',stu_id=id,books=books)
 
 @app.route('/assign/<int:bk_id>/<int:st_id>',methods=['POST','GET'])
@@ -95,13 +95,32 @@ def assign(bk_id,st_id):
     book=Book.query.get_or_404(bk_id)
     student=Student.query.get_or_404(st_id)
     student.book=book
-
     try:
         db.session.commit()
         return redirect('/student')
     except:
         return 'There was an issue adding student'
-    
+
+@app.route('/displayAddressForm/<int:id>')
+def displayAddressForm(id):
+    return render_template('student_add_addr.html',stu_id=id)
+
+@app.route('/add_addr',methods=['POST','GET'])
+def addAddress():
+    if request.method=='POST':
+        student_id=request.form['id']
+        student=Student.query.get_or_404(student_id)
+        addr=request.form['addr']  
+        newaddress=Address(addr=addr,student=student)
+        
+        try:
+            db.session.add(newaddress)
+            db.session.commit()
+        except:
+            return 'There was an issue adding Address'
+        
+        return redirect('/student')
+
 @app.route('/media/images/<filename>')
 def retrieve_image(filename):
     return send_from_directory(app.config['UPLOADED_IMAGES_DEST'],filename)

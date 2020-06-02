@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Add Address</title>
+{% endblock %}
+
+{% block body %} 
+<div class="content">
+    <h1>Add Address</h1>
+
+    <form action='/add_addr' method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{stu_id}}">
+        <textarea name="addr" id="addr" rows="1" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Add address">
+    </form>
+</div>
+
+{% endblock %}

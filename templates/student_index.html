@@ -13,8 +13,8 @@
         <tr>
             <th width="20%">Profile Pic</th>
             <th width="30%">Student Name</th>
-            <th width="20%">Book Cover</th>
-            <th width="30%">Book Name</th>
+            <th width="30%">Address</th>
+            <th width="20%">Add Address</th>
         </tr>
         {% for student in students %}
         <tr>
@@ -23,18 +23,10 @@
             </td>
             <td>{{student.name}}</td>
             <td>
-                {% if student.book is not none %}
-                <img src="{{ url_for('retrieve_image', filename=student.book.filename) }}" width="50px" height="50px" style="object-fit:cover">
-                {% else %}
-                Not yet assigned
-                {% endif %}
+                {{student.addresses}}
             </td>
             <td>
-                {% if student.book is none %}
-                <a href="/displayBook/{{student.id}}">Assign</a><br>
-                {% else %}
-                {{student.book.name}}
-                {% endif %}    
+                <a href="/displayAddressForm/{{student.id}}">Add</a><br>    
             </td>            
         </tr>
         {% endfor %}
