@@ -3,7 +3,7 @@
 <title>Book Manager</title>
 {% endblock %}
 
-{% block body %} 
+{% block body %}
 
 <!-- <img src="{{ url_for('static',filename='images/book_store.jpg') }}" width="200px"> -->
 <div class="content">
@@ -11,12 +11,16 @@
 
     <table>
         <tr>
+            <th>Cover Page</th>
             <th>Book Name</th>
             <th>Book Price</th>
             <th>Options</th>
         </tr>
         {% for book in books %}
         <tr>
+            <td>
+                <img src="{{ url_for('retrieve_image', filename=book.filename) }}" width="100px" height="153px">
+            </td>
             <td>{{book.name}}</td>
             <td>Rs. {{book.price}}</td>
             <td>
@@ -26,10 +30,12 @@
         </tr>
         {% endfor %}
     </table>
-
-    <form action='/' method="POST">
+</div>
+<div class="content_form">
+    <form action='/' method="POST" enctype="multipart/form-data" style="margin: 10px;">
         <input type="text" name="bookname" id="bookname" placeholder="Enter Book Name"><br>
         <input type="text" name="price" id="price" placeholder="Enter Book Price"><br>
+        <input type="file" name="cover_page" accept="image/*"><br>
         <input type="submit" value="Add book">
     </form>
 </div>

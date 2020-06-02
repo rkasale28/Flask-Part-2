@@ -1,15 +1,28 @@
 body, html {
     margin: 0;
     font-family: sans-serif;
+    text-align: center;
 }
 
-/*body{
-    background-image: url('../images/book_store.jpg')
-}*/
+body{
+    background-image: url('../images/book_store.jpg');
+    background-attachment: fixed;
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: 1500px 733px;
+}
 
-.content {
-    margin: 0 auto;
-    width: 400px;
+.content,.content_form {
+    margin: 10px;
+    width: 600px;
+    background-color: #fff;
+    padding: 10px;
+}
+
+.content_form{
+    position: fixed;
+    bottom: 40%;
+    right: 3%;
 }
 
 table, td, th {
@@ -19,6 +32,7 @@ table, td, th {
 table {
     border-collapse: collapse;
     width: 100%;
+    align-content: center;
 }
 
 th {
@@ -32,6 +46,15 @@ td {
 
 .form {
     margin-top: 20px;
+    display: inline-block;
+}
+
+input[type="text"]{
+    width: 300px;
+}
+
+input{
+    margin-top: 5px;
 }
 
 #content {
