@@ -13,3 +13,5 @@
     - [Video Tutorial](https://www.youtube.com/watch?v=HNw6shJv9Ck)
     - [Documentation](https://pythonhosted.org/Flask-Uploads/)
   - [Retrieving](https://gist.github.com/greyli/ca74d71f13c52d089a8da8d2b758d519)
+- Relationship
+  - [One-to-One-Relationship](https://www.youtube.com/watch?v=JI76IvF9Lwg)
