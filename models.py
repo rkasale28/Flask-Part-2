@@ -29,3 +29,27 @@ class Address(db.Model):
     def __repr__(self):
         return self.addr
 
+subs = db.Table('subs',
+        db.Column('book_id',db.Integer,db.ForeignKey('audiobook.id')),
+        db.Column('user_id',db.Integer,db.ForeignKey('listener.id'))
+        )
+
+class AudioBook(db.Model):
+    __tablename__='audiobook'
+    id = db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(100),nullable=False)
+    author=db.Column(db.String(20),nullable=False)
+    speaker=db.Column(db.String(20),nullable=False)
+  
+    def __repr__(self):
+        return self.name
+
+class Listener(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    profile_pic=db.Column(db.String(100))
+    name=db.Column(db.String(20),nullable=False)
+    subscriptions=db.relationship('AudioBook',secondary=subs,
+    backref=db.backref('subscribers',lazy='dynamic'))
+
+    def __repr__(self):
+        return self.name

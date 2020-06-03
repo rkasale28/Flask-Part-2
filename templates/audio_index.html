@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Audio Book Manager</title>
+{% endblock %}
+
+{% block body %}
+
+<!-- <img src="{{ url_for('static',filename='images/book_store.jpg') }}" width="200px"> -->
+<div class="content">
+    <h1>Audio Book Manager</h1>
+
+    <table>
+        <tr>
+            <th width="25%">Book Name</th>
+            <th width="25%">Author</th>
+            <th width="25%">Speaker</th>
+            <th width="25%">Subscribers</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.speaker}}</td>
+            <td>
+                {% for subscriber in book.subscribers%}
+                {{subscriber}}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="content_form">
+    <form action='/audio' method="POST" enctype="multipart/form-data" style="margin: 10px;">
+        <input type="text" name="bookname" id="bookname" placeholder="Enter Book Name"><br>
+        <input type="text" name="author" id="author" placeholder="Enter Book Author"><br>
+        <input type="text" name="speaker" id="speaker" placeholder="Enter Speaker"><br>
+        <input type="submit" value="Add book">
+    </form>
+</div>
+
+{% endblock %}

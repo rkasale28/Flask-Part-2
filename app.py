@@ -1,5 +1,5 @@
 from flask import Flask,request,redirect,render_template,send_from_directory
-from models import db,Book,migrate,Student,Address
+from models import db,Book,migrate,Student,Address,Listener,AudioBook
 from flask_migrate import MigrateCommand
 from flask_script import Manager
 from flask_uploads import configure_uploads, IMAGES, UploadSet
@@ -120,6 +120,58 @@ def addAddress():
             return 'There was an issue adding Address'
         
         return redirect('/student')
+
+@app.route('/listeners',methods=['POST','GET'])
+def listener_index():
+    if request.method=='POST':
+        listener_name=request.form['name']
+        profile_pic=request.files['profile_pic']
+        filename=images.save(profile_pic)
+        newuser=Listener(name=listener_name,profile_pic=filename)
+
+        try:
+            db.session.add(newuser)
+            db.session.commit()
+            return redirect('/listeners')
+        except:
+            return 'There was an issue adding listener'
+    else:
+        listeners=Listener.query.order_by('name').all()
+        return render_template('listener_index.html', listeners=listeners)
+
+@app.route('/audio',methods=['POST','GET'])
+def audio_index():
+    if request.method=='POST':
+        bookname=request.form['bookname']
+        author=request.form['author']
+        speaker=request.form['speaker']
+        newbook=AudioBook(name=bookname,author=author,speaker=speaker)
+
+        try:
+            db.session.add(newbook)
+            db.session.commit()
+            return redirect('/audio')
+        except Exception as e:
+            return e #'There was an issue adding audio book'
+    else:
+        books=AudioBook.query.order_by('name').all()
+        return render_template('audio_index.html', books=books)
+
+@app.route('/displayBooksList/<int:id>')
+def displayBooksList(id):
+    books=AudioBook.query.order_by('name').all()
+    return render_template('display_book_list.html',stu_id=id,books=books)
+
+@app.route('/subscribe/<int:bk_id>/<int:st_id>',methods=['POST','GET'])
+def subscribe(bk_id,st_id):
+    book=AudioBook.query.get_or_404(bk_id)
+    listener=Listener.query.get_or_404(st_id)
+    listener.subscriptions.append(book)
+    try:
+        db.session.commit()
+        return redirect('/listeners')
+    except:
+        return 'There was an issue in subscription'
 
 @app.route('/media/images/<filename>')
 def retrieve_image(filename):

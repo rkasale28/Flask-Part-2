@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Listener Manager</title>
+{% endblock %}
+
+{% block body %}
+
+<!-- <img src="{{ url_for('static',filename='images/book_store.jpg') }}" width="200px"> -->
+<div class="content">
+    <h1>Listener Manager</h1>
+
+    <table>
+        <tr>
+            <th>Profile Pic</th>
+            <th>Listener Name</th>
+            <th>Subscriptions</th>
+            <th>Add</th>
+        </tr>
+        {% for listener in listeners %}
+        <tr>
+            <td>
+                <img src="{{ url_for('retrieve_image', filename=listener.profile_pic) }}" width="50px" height="50px" style="border-radius: 50px;object-fit:cover">
+            </td>
+            <td>{{listener.name}}</td>
+            <td>{{listener.subscriptions}}</td>
+            <td>
+                <a href="/displayBooksList/{{listener.id}}">Add</a><br>    
+            </td>       
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="content_form">
+    <form action='/listeners' method="POST" enctype="multipart/form-data" style="margin: 10px;">
+        <input type="text" name="name" id="name" placeholder="Enter Listener Name"><br>
+        <input type="file" name="profile_pic" accept="image/*"><br>
+        <input type="submit" value="Add Listener">
+    </form>
+</div>
+
+{% endblock %}
